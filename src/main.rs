@@ -41,7 +41,41 @@ impl Person {
     }
 }
 
+#[derive(Debug)]
+pub struct Stepper {
+    curr: i32,
+    step: i32,
+    max: i32,
+}
+
+impl Iterator for Stepper {
+    type Item = i32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.curr <= self.max {
+            let result = Some(self.curr);
+            self.curr += self.step;
+            result
+        } else {
+            None
+        }
+    }
+}
+
 fn main() {
+    let mut st = Stepper {
+        curr: 0,
+        step: 2,
+        max: 20,
+    };
+
+    loop {
+        match st.next() {
+            Some(expr) => println!("loop value {}", expr),
+            None => break,
+        }
+    }
+
     let p = Person {
         name: "matt".to_string(),
         age: 35,
@@ -72,5 +106,14 @@ fn main() {
     match divide_proper(10, 0) {
         Result::Ok(x) => println!("Answer -> {}", x),
         Result::Err(y) => println!("Error is {}", y),
+    }
+
+    let mut m = 0;
+    loop {
+        m += 1;
+        if m == 10 {
+            break;
+        }
+        println!("looper");
     }
 }
