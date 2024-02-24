@@ -62,6 +62,15 @@ impl Iterator for Stepper {
     }
 }
 
+// impl IntoIterator for Stepper {
+//     type Item = i32;
+//     type IntoIter = Self;
+//
+//     fn into_iter(self) -> Self::IntoIter {
+//         self
+//     }
+// }
+
 fn main() {
     let mut st = Stepper {
         curr: 0,
@@ -76,11 +85,22 @@ fn main() {
         }
     }
 
+    let mut rr = Stepper {
+        curr: 1,
+        step: 2,
+        max: 10,
+    };
+
+    while let Some(n) = rr.next() {
+        println!("while let => {}", n);
+    }
+
     let p = Person {
         name: "matt".to_string(),
         age: 35,
         children: 4,
     };
+
     println!("Hello, people, from {}", p.print());
     println!("{:?}", p);
 
