@@ -18,7 +18,7 @@ fn divide_proper(a: i32, b: i32) -> Result<i32, String> {
     Result::Ok(a / b)
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Person {
     name: String,
     age: i32,
@@ -67,11 +67,33 @@ impl Iterator for Stepper {
 //     type IntoIter = Self;
 //
 //     fn into_iter(self) -> Self::IntoIter {
-//         self
-//     }
+//         self } } #[derive(Debug, Clone, Copy)] pub struct Point { x: i32, y: i32,
 // }
 
+#[derive(Debug, Clone, Copy)]
+pub struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Point {
+    pub fn new(x: i32, y: i32) -> Self {
+        Point { x, y }
+    }
+}
+
 fn main() {
+    let mut pnt1 = Point::new(4, 5);
+    let mut pnt2 = pnt1;
+
+    println!("pnt1 -> {:?} pnt2 -> {:?}", pnt1, pnt2);
+
+    pnt1.y += 10;
+    pnt2.y += 40;
+    pnt2.x += 400;
+
+    println!("pnt1 ={:?} pnt2 = {:?}", pnt1, pnt2);
+
     let mut st = Stepper {
         curr: 0,
         step: 2,
@@ -136,4 +158,15 @@ fn main() {
         }
         println!("looper");
     }
+
+    let y = Person {
+        name: "Traveller".to_string(),
+        age: 45,
+        children: 654,
+    };
+
+    let mut cc = y.clone();
+
+    cc.name.push_str("folloe the sun");
+    println!("y = {:?} cc = {:?}", y, cc);
 }
